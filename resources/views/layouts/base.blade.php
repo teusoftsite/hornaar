@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>{{ isset($title) ? $title . ' – ' : '' }}MeldHoornaar.nl</title>
+<meta name="description" content="@yield('description', 'Nest van de Aziatische hoornaar gezien? Meld het. Gratis, zonder account.')">
+<meta name="theme-color" content="#1c1712">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/css/app.css?v=1">
+@stack('head')
+</head>
+<body>
+@yield('body')
+@stack('scripts')
+</body>
+</html>

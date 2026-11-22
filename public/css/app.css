@@ -1,0 +1,85 @@
+/* MeldHoornaar.nl — huisstijl zonder build-stap */
+:root{--ink:#1c1712;--paper:#fbf6ec;--orange:#ec7a1c;--orange-l:#f39a4a;--yellow:#f4c430;--brown:#a84a0c;--mute:#6b6156;--border:#d8c9ae;--panel:#f3ead9;--green:#1f6b45;--red:#b3261e;--cream:#f6efe3;
+--display:'Bricolage Grotesque',Inter,system-ui,sans-serif;--body:Inter,system-ui,-apple-system,sans-serif;--r:10px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.5 var(--body)}
+img{max-width:100%}
+a{color:var(--brown)}a:hover{color:var(--ink)}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.5px;line-height:1.1;margin:0 0 .5em}
+h1{font-size:40px}h2{font-size:26px}h3{font-size:19px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.stripe{height:8px;background:repeating-linear-gradient(90deg,var(--orange) 0 48px,var(--ink) 48px 64px)}
+.top{border-bottom:1px solid var(--border);background:var(--paper)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.top img{height:36px;display:block}
+.nav{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.nav a,.nav button{font:500 15px var(--body);color:var(--ink);text-decoration:none;padding:8px 12px;border-radius:8px;background:none;border:0;cursor:pointer}
+.nav a.on,.nav a:hover,.nav button:hover{background:var(--panel)}
+.nav .who{color:var(--mute);font-size:13px;padding:0 8px}
+main{padding:28px 0 64px}
+.foot{background:var(--ink);color:#a8a096;font-size:14px}
+.foot .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:24px;padding-bottom:24px}
+.foot a{color:var(--orange-l)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 16px var(--body);background:var(--ink);color:var(--cream);border:0;border-radius:var(--r);padding:12px 20px;min-height:46px;cursor:pointer;text-decoration:none}
+.btn:hover{color:var(--cream);opacity:.9}
+.btn.orange{background:var(--orange);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.green{background:var(--green)}.btn.red{background:var(--red)}
+.btn.small{font-size:14px;padding:7px 12px;min-height:34px}
+.btn.big{font-size:18px;min-height:64px;padding:18px 24px;width:100%}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:20px}
+.card.white{background:#fffdf8}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.stat{font:800 36px/1 var(--display)}.stat small{display:block;font:500 13px var(--body);color:var(--mute);margin-top:6px}
+.muted{color:var(--mute)}.small{font-size:13px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.row.between{justify-content:space-between}
+.stack>*+*{margin-top:12px}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}
+input,select,textarea{font:400 16px var(--body);padding:10px 12px;border:1px solid var(--border);border-radius:6px;background:#fffdf8;color:var(--ink);width:100%}
+input[type=checkbox],input[type=radio]{width:auto}
+textarea{min-height:80px}
+input:focus,select:focus,textarea:focus,.btn:focus-visible{outline:3px solid var(--yellow);outline-offset:1px}
+.alert{padding:12px 16px;border-radius:var(--r);margin-bottom:16px;border:1px solid}
+.alert.ok{background:#e6f2ea;border-color:#9cc8ad;color:var(--green)}
+.alert.err{background:#f9e4e2;border-color:#e0a49f;color:var(--red)}
+.alert ul{margin:0;padding-left:18px}
+table.t{width:100%;border-collapse:collapse;font-size:15px}
+.t th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--border)}
+.t td{padding:10px;border-bottom:1px solid var(--border);vertical-align:top}
+.t tr.link{cursor:pointer}.t tr.link:hover td{background:var(--panel)}
+.t .r{text-align:right}
+.tablewrap{overflow-x:auto}
+.badge{display:inline-block;font:600 12px var(--body);padding:3px 9px;border-radius:99px;background:var(--border);color:var(--ink);white-space:nowrap}
+.b-gemeld{background:var(--yellow)}.b-goedgekeurd{background:#f8d9b8}.b-opdracht_gegeven{background:var(--orange)}
+.b-ingepland{background:#cfe0f5}.b-geen_toegang{background:#f1c6c2}.b-bestreden,.b-betaald{background:#bfe0cb}
+.b-gefactureerd{background:#d6e8dc}.b-afgewezen,.b-samengevoegd{background:#e6ddd0;color:var(--mute)}
+.b-concept{background:var(--border)}.b-verstuurd{background:#cfe0f5}.b-te_laat{background:var(--red);color:#fff}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.tabs a{padding:7px 12px;border-radius:99px;text-decoration:none;color:var(--ink);border:1px solid var(--border);font-size:14px}
+.tabs a.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.map{height:420px;border-radius:14px;border:1px solid var(--border);overflow:hidden;z-index:0}
+.map.tall{height:60vh}
+.photo{border-radius:10px;border:1px solid var(--border);max-height:320px;object-fit:cover}
+.timeline{list-style:none;margin:0;padding:0}
+.timeline li{padding:8px 0 8px 18px;border-left:2px solid var(--border);position:relative}
+.timeline li:before{content:"";position:absolute;left:-6px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--orange)}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;align-items:center;padding:40px 0}
+.hero h1{font-size:60px;line-height:1;letter-spacing:-1.5px}
+.hero p.lead{font-size:20px;line-height:30px;color:var(--mute);max-width:460px}
+.dark{background:var(--ink);color:var(--cream)}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.steps b{display:block;font:800 40px var(--display);color:var(--orange-l)}
+.offline{position:fixed;left:0;right:0;bottom:0;background:var(--yellow);color:var(--ink);text-align:center;padding:8px;font-weight:600;z-index:999;display:none}
+.choice{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.choice label{border:1.5px solid var(--border);border-radius:var(--r);padding:12px;text-align:center;cursor:pointer;background:#fffdf8;font-weight:600}
+.choice input{position:absolute;opacity:0}
+.choice input:checked+span{color:var(--brown)}
+.choice label:has(input:checked){border-color:var(--orange);background:#fdf0e2}
+.right{text-align:right}
+@media (max-width:640px){h1{font-size:32px}.hero h1{font-size:44px}.map{height:320px}}
+@media print{.top,.foot,.btn,.nav{display:none}}
