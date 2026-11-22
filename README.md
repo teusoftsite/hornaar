@@ -9,7 +9,7 @@ Gebouwd volgens **Bouwontwerp v1** (blokken 1 t/m 6).
 - Laravel Fortify: inloggen, wachtwoord vergeten/instellen, 2FA (geen registratie: accounts maakt de beheerder of de bestrijder-eigenaar)
 - Blade + gewone CSS (`public/css/app.css`, tokens uit het design system **EasySoft-stijl**) + klein beetje vanilla JS. **Geen build-stap** (geen npm nodig op de server)
 - Huisstijl: EasySoft-stijl (oranje `#F38B12`, bijna-zwart `#17181B`, Space Grotesk + Inter, donkere menubalk 64 px). Logo N3 (nest in locatiepin): `resources/views/partials/logo.blade.php`, `public/logo.svg`, `public/logo-dark.svg`, `public/favicon.svg`
-- Publieke pagina's zijn omgezet vanaf het design-canvas: home, zakelijk, `/info` (het verhaal) en `/info/herkennen`, `/jaarcyclus`, `/nesten-zoeken`, `/achtergrond`, `/vragen`. De foto's horen in `public/img/info/` (zie `LEESMIJ.md` daar); ontbreekt een foto, dan verbergt de pagina hem
+- Publieke pagina's zijn omgezet vanaf het design-canvas: home, zakelijk, `/info` (het verhaal) en `/info/herkennen`, `/jaarcyclus`, `/nesten-zoeken`, `/achtergrond`, `/vragen`. De foto's staan in `public/img/info/` (zie `LEESMIJ.md` daar)
 - Leaflet + PDOK BRT-achtergrondkaart, PDOK Locatieserver voor adres en gemeente
 - barryvdh/laravel-dompdf voor factuur-PDF's
 - Pest 3: `./vendor/bin/pest` (33 tests, dekken de acceptatiecriteria van alle blokken)
