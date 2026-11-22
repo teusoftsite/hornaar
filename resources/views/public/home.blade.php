@@ -2,12 +2,7 @@
 @section('body')
 <div style="font-family: Inter, system-ui, sans-serif; color: #17181B; background: #EEF0F2">
 
-<header style="border-bottom: 1px solid #DCE0E4">
-<div style="max-width: 1100px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
-<a href="{{ route('home') }}" style="text-decoration:none">@include('partials.logo', ['dark' => false, 'h' => 40, 'id' => 'homeh'])</a>
-        <a href="{{ route('zakelijk') }}" style="font-size: 15px; font-weight: 500; color: #5B6169">Voor gemeenten en bestrijders →</a>
-</div>
-</header>
+@include('partials.publicnav')
 
 <section style="max-width: 1100px; margin: 0 auto; padding: 64px 24px 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; align-items: start">
 <div style="display: flex; flex-direction: column; gap: 20px; padding-top: 16px">
