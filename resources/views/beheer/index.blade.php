@@ -2,10 +2,10 @@
 @section('content')
 <h1>Beheer</h1>
 <div class="grid g4" style="margin-bottom:20px">
-  <div class="card"><div class="stat">{{ $gemeenten->count() }}<small>gemeenten</small></div></div>
-  <div class="card"><div class="stat">{{ $bestrijders->count() }}<small>bestrijders</small></div></div>
+  <div class="card"><div class="stat">{{ $gemeenten->count() }}<small>Gemeenten</small></div></div>
+  <div class="card"><div class="stat">{{ $bestrijders->count() }}<small>Bestrijders</small></div></div>
   <div class="card"><div class="stat">{{ $stats['open'] }}<small>open nesten (van {{ $stats['nesten'] }})</small></div></div>
-  <div class="card"><div class="stat">{{ $stats['gebruikers'] }}<small>gebruikers</small></div></div>
+  <div class="card"><div class="stat">{{ $stats['gebruikers'] }}<small>Gebruikers</small></div></div>
 </div>
 <div class="grid g2" style="align-items:start">
   <div class="stack">

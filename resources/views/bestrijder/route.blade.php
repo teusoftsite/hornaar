@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
   @if($org->base_lat) var base = [{{ $org->base_lat }}, {{ $org->base_lng }}]; L.marker(base).addTo(m).bindPopup('Werkplaats'); pts.push(base); @endif
   @foreach($stops as $a) MH.pin({{ $a->nest->lat }}, {{ $a->nest->lng }}, 'ingepland', '{{ $loop->iteration }}').addTo(m); pts.push([{{ $a->nest->lat }}, {{ $a->nest->lng }}]); @endforeach
   @if($org->base_lat) if (pts.length > 1) pts.push(base); @endif
-  if (pts.length > 1) { L.polyline(pts, {color: '#1c1712', weight: 3, dashArray: '6 6'}).addTo(m); m.fitBounds(pts, {padding: [30, 30]}); }
+  if (pts.length > 1) { L.polyline(pts, {color: '#17181B', weight: 3, dashArray: '6 6'}).addTo(m); m.fitBounds(pts, {padding: [30, 30]}); }
   else if (pts.length) m.setView(pts[0], 14);
 });
 </script>

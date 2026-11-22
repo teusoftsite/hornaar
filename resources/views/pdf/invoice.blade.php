@@ -2,22 +2,22 @@
 <html lang="nl"><head><meta charset="utf-8">
 <style>
 @page{margin:36px 44px}
-body{font-family:DejaVu Sans,sans-serif;font-size:10.5pt;color:#1c1712}
+body{font-family:DejaVu Sans,sans-serif;font-size:10pt;color:#17181B}
 h1{font-size:20pt;margin:0 0 4px}
-.stripe{height:6px;background:#ec7a1c;margin-bottom:18px}
+.stripe{height:6px;background:#F38B12;margin-bottom:18px}
 table{width:100%;border-collapse:collapse}
 .meta td{vertical-align:top;padding:0}
-.lines th{text-align:left;border-bottom:2px solid #d8c9ae;padding:6px 4px;font-size:9pt;color:#6b6156}
-.lines td{border-bottom:1px solid #e8dcc6;padding:6px 4px}
-.r{text-align:right}.mute{color:#6b6156}.tot td{border:0;padding:3px 4px}
+.lines th{text-align:left;border-bottom:2px solid #DCE0E4;padding:6px 4px;font-size:9pt;color:#5B6169}
+.lines td{border-bottom:1px solid #DCE0E4;padding:6px 4px}
+.r{text-align:right}.mute{color:#5B6169}.tot td{border:0;padding:3px 4px}
 </style></head>
 <body>
 @php($b = $invoice->bestrijder)
 @php($g = $invoice->gemeente)
-<div class="stripe"></div>
+<div class="stripe"></div><div style="font-weight:bold;font-size:13pt;margin-bottom:14px"><span style="color:#B85F00">Meld</span>Hoornaar<span style="color:#5B6169;font-weight:normal;font-size:9pt"> · factuur namens de bestrijder</span></div>
 <table class="meta"><tr>
   <td style="width:55%"><h1>{{ $invoice->credits_invoice_id ? 'Creditfactuur' : 'Factuur' }}</h1>
-    <div class="mute">Nummer: <strong style="color:#1c1712">{{ $invoice->number ?? 'CONCEPT' }}</strong><br>
+    <div class="mute">Nummer: <strong style="color:#17181B">{{ $invoice->number ?? 'CONCEPT' }}</strong><br>
     Datum: {{ ($invoice->sent_at ?? now())->format('d-m-Y') }}<br>
     Periode: {{ $invoice->period }}<br>
     @if($invoice->due_on)Vervaldatum: {{ $invoice->due_on->format('d-m-Y') }}@endif

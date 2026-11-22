@@ -5,7 +5,7 @@
   <p class="alert ok">Tweestapsverificatie staat aan.</p>
   @if(session('status') === 'two-factor-authentication-confirmed')
     <p>Bewaar deze herstelcodes op een veilige plek. Elke code werkt één keer.</p>
-    <pre style="background:var(--panel);padding:12px;border-radius:8px">@foreach($user->recoveryCodes() as $c){{ $c }}
+    <pre style="background:var(--grijsvlak);padding:12px;border-radius:8px">@foreach($user->recoveryCodes() as $c){{ $c }}
 @endforeach</pre>
   @endif
   <a class="btn orange" href="{{ $user->homeRoute() }}" style="width:100%">Verder</a>

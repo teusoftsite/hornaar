@@ -3,10 +3,10 @@
 @section('content')
 <div class="row between"><h1>Meldingen {{ $org->name }}</h1><a class="btn ghost small" href="{{ route('gemeente.rapport') }}">Rapportage</a></div>
 <div class="grid g4" style="margin-bottom:20px">
-  <div class="card"><div class="stat">{{ $counts['gemeld'] ?? 0 }}<small>te beoordelen</small></div></div>
-  <div class="card"><div class="stat">{{ ($counts['goedgekeurd'] ?? 0) }}<small>wacht op opdracht</small></div></div>
-  <div class="card"><div class="stat">{{ ($counts['opdracht_gegeven'] ?? 0) + ($counts['ingepland'] ?? 0) + ($counts['geen_toegang'] ?? 0) }}<small>bij bestrijder</small></div></div>
-  <div class="card"><div class="stat">{{ ($counts['bestreden'] ?? 0) + ($counts['gefactureerd'] ?? 0) }}<small>bestreden</small></div></div>
+  <div class="card"><div class="stat oranje">{{ $counts['gemeld'] ?? 0 }}<small>Te beoordelen</small></div></div>
+  <div class="card"><div class="stat">{{ ($counts['goedgekeurd'] ?? 0) }}<small>Wacht op opdracht</small></div></div>
+  <div class="card"><div class="stat">{{ ($counts['opdracht_gegeven'] ?? 0) + ($counts['ingepland'] ?? 0) + ($counts['geen_toegang'] ?? 0) }}<small>Bij bestrijder</small></div></div>
+  <div class="card"><div class="stat groen">{{ ($counts['bestreden'] ?? 0) + ($counts['gefactureerd'] ?? 0) }}<small>Bestreden</small></div></div>
 </div>
 <nav class="tabs">
   @foreach(['open' => 'Open', 'gemeld' => 'Te beoordelen', 'goedgekeurd' => 'Goedgekeurd', 'opdracht_gegeven' => 'Opdracht gegeven', 'ingepland' => 'Ingepland', 'geen_toegang' => 'Geen toegang', 'bestreden' => 'Bestreden', 'gefactureerd' => 'Gefactureerd', 'afgewezen' => 'Afgewezen', 'alle' => 'Alle'] as $k => $v)

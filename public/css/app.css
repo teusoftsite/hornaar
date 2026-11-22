@@ -1,85 +1,105 @@
-/* MeldHoornaar.nl — huisstijl zonder build-stap */
-:root{--ink:#1c1712;--paper:#fbf6ec;--orange:#ec7a1c;--orange-l:#f39a4a;--yellow:#f4c430;--brown:#a84a0c;--mute:#6b6156;--border:#d8c9ae;--panel:#f3ead9;--green:#1f6b45;--red:#b3261e;--cream:#f6efe3;
---display:'Bricolage Grotesque',Inter,system-ui,sans-serif;--body:Inter,system-ui,-apple-system,sans-serif;--r:10px}
+/* MeldHoornaar.nl — EasySoft-stijl (tokens uit design system "EasySoft-stijl"), geen build-stap */
+:root{--bg:#EEF0F2;--kaart:#FFFFFF;--grijsvlak:#F2F4F6;--lijn:#DCE0E4;--lijn2:#C3C8CE;--tekst:#17181B;--zacht:#5B6169;
+--balk:#17181B;--balktekst:#C9CDD2;--oranje:#F38B12;--op-oranje:#17181B;--oranjetekst:#B85F00;--oranjevlak:#FFF1E0;
+--rood:#C42B1C;--roodvlak:#FDE8E6;--groen:#1E7A46;--groenvlak:#E3F4EA;--blauw:#1d5fa8;--blauwvlak:#E6EFF9;
+--display:'Space Grotesk',Inter,system-ui,sans-serif;--body:Inter,system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+--r-sm:6px;--r:8px;--r-kaart:10px;--r-xl:12px}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.5 var(--body)}
+body{margin:0;background:var(--bg);color:var(--tekst);font:400 14px/20px var(--body)}
 img{max-width:100%}
-a{color:var(--brown)}a:hover{color:var(--ink)}
-h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.5px;line-height:1.1;margin:0 0 .5em}
-h1{font-size:40px}h2{font-size:26px}h3{font-size:19px}
-.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-.stripe{height:8px;background:repeating-linear-gradient(90deg,var(--orange) 0 48px,var(--ink) 48px 64px)}
-.top{border-bottom:1px solid var(--border);background:var(--paper)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
-.top img{height:36px;display:block}
-.nav{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.nav a,.nav button{font:500 15px var(--body);color:var(--ink);text-decoration:none;padding:8px 12px;border-radius:8px;background:none;border:0;cursor:pointer}
-.nav a.on,.nav a:hover,.nav button:hover{background:var(--panel)}
-.nav .who{color:var(--mute);font-size:13px;padding:0 8px}
-main{padding:28px 0 64px}
-.foot{background:var(--ink);color:#a8a096;font-size:14px}
-.foot .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:24px;padding-bottom:24px}
-.foot a{color:var(--orange-l)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 16px var(--body);background:var(--ink);color:var(--cream);border:0;border-radius:var(--r);padding:12px 20px;min-height:46px;cursor:pointer;text-decoration:none}
-.btn:hover{color:var(--cream);opacity:.9}
-.btn.orange{background:var(--orange);color:var(--ink)}
-.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-.btn.green{background:var(--green)}.btn.red{background:var(--red)}
-.btn.small{font-size:14px;padding:7px 12px;min-height:34px}
-.btn.big{font-size:18px;min-height:64px;padding:18px 24px;width:100%}
+a{color:var(--oranjetekst);font-weight:600}a:hover{color:var(--tekst)}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.5px;margin:0 0 .5em}
+h1{font-size:28px;line-height:34px}h2{font-size:20px;line-height:26px}h3{font-size:16px;line-height:22px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+/* Menubalk (64px, donker, actief = wit met oranje streep) */
+.balk{background:var(--balk);color:#fff;min-height:64px}
+.balk .wrap{display:flex;align-items:center;gap:28px;flex-wrap:wrap;max-width:none;padding:0 24px}
+.balk .logo-link{display:flex;align-items:center;text-decoration:none}
+.balk nav{display:flex;gap:2px;flex-wrap:wrap;min-height:64px}
+.balk nav a{color:var(--balktekst);text-decoration:none;padding:0 12px;display:flex;align-items:center;border-bottom:3px solid transparent;font-weight:600;font-size:14px}
+.balk nav a:hover{color:#fff}
+.balk nav a.on{color:#fff;border-bottom-color:var(--oranje)}
+.balk .rechts{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:12px;color:var(--balktekst)}
+.balk .rechts button,.balk .rechts a{background:none;border:1px solid #3A3F45;color:var(--balktekst);border-radius:var(--r);padding:6px 10px;font:600 12px var(--body);cursor:pointer;text-decoration:none}
+.balk .rechts button:hover,.balk .rechts a:hover{color:#fff;border-color:var(--balktekst)}
+main{padding:32px 0 64px}
+.foot{background:var(--balk);color:#A3A9B1;font-size:14px;border-top:1px solid #2C3035}
+.foot .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:28px;padding-bottom:28px}
+.foot a{color:#FFAA45}
+/* Knoppen: één oranje hoofdknop per scherm */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 14px/20px var(--body);background:var(--grijsvlak);color:var(--tekst);border:1px solid var(--lijn);border-radius:var(--r);padding:10px 16px;min-height:42px;cursor:pointer;text-decoration:none}
+.btn:hover{color:var(--tekst);background:#E7EAED}
+.btn.orange{background:var(--oranje);color:var(--op-oranje);border-color:var(--oranje)}
+.btn.orange:hover{background:#E57F08}
+.btn.dark{background:var(--tekst);color:#F2F3F5;border-color:var(--tekst)}
+.btn.ghost{background:var(--kaart)}
+.btn.green{background:var(--groen);color:#fff;border-color:var(--groen)}
+.btn.red{background:var(--rood);color:#fff;border-color:var(--rood)}
+.btn.small{font-size:13px;padding:6px 12px;min-height:32px}
+.btn.big{font-size:18px;min-height:64px;padding:18px 24px;width:100%;border-radius:10px}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:20px}
-.card.white{background:#fffdf8}
-.grid{display:grid;gap:20px}
-.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.card{background:var(--kaart);border:1px solid var(--lijn);border-radius:var(--r-kaart);padding:16px 20px}
+.card.white{background:var(--kaart)}
+.card.flat{background:var(--grijsvlak)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
 .g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.g4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-.stat{font:800 36px/1 var(--display)}.stat small{display:block;font:500 13px var(--body);color:var(--mute);margin-top:6px}
-.muted{color:var(--mute)}.small{font-size:13px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.stat{font:700 32px/36px var(--display);letter-spacing:-.5px}
+.stat small{display:block;font:600 13px/18px var(--body);color:var(--zacht);margin-top:4px;letter-spacing:0}
+.card .stat{display:flex;flex-direction:column-reverse}
+.stat.oranje{color:var(--oranjetekst)}.stat.groen{color:var(--groen)}.stat.rood{color:var(--rood)}
+.muted{color:var(--zacht)}.small{font-size:12px;line-height:16px}
 .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.row.between{justify-content:space-between}
 .stack>*+*{margin-top:12px}
-label.f{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}
-input,select,textarea{font:400 16px var(--body);padding:10px 12px;border:1px solid var(--border);border-radius:6px;background:#fffdf8;color:var(--ink);width:100%}
-input[type=checkbox],input[type=radio]{width:auto}
+.paginakop{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.paginakop h1{margin:0}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;line-height:16px}
+input,select,textarea{font:400 14px var(--body);padding:9px 12px;border:1px solid var(--lijn);border-radius:var(--r);background:var(--kaart);color:var(--tekst);width:100%;min-height:40px}
+input[type=checkbox],input[type=radio]{width:auto;min-height:0;accent-color:var(--oranje)}
 textarea{min-height:80px}
-input:focus,select:focus,textarea:focus,.btn:focus-visible{outline:3px solid var(--yellow);outline-offset:1px}
-.alert{padding:12px 16px;border-radius:var(--r);margin-bottom:16px;border:1px solid}
-.alert.ok{background:#e6f2ea;border-color:#9cc8ad;color:var(--green)}
-.alert.err{background:#f9e4e2;border-color:#e0a49f;color:var(--red)}
+input:focus,select:focus,textarea:focus,.btn:focus-visible,a:focus-visible{outline:2px solid var(--oranje);outline-offset:1px}
+.alert{padding:12px 16px;border-radius:var(--r);margin-bottom:16px;border:1px solid;font-weight:500}
+.alert.ok{background:var(--groenvlak);border-color:#A9D8BC;color:var(--groen)}
+.alert.err{background:var(--roodvlak);border-color:#F1B4AD;color:var(--rood)}
+.alert.warn{background:var(--oranjevlak);border-color:#F6C88E;color:var(--tekst)}
 .alert ul{margin:0;padding-left:18px}
-table.t{width:100%;border-collapse:collapse;font-size:15px}
-.t th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--border)}
-.t td{padding:10px;border-bottom:1px solid var(--border);vertical-align:top}
-.t tr.link{cursor:pointer}.t tr.link:hover td{background:var(--panel)}
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+.t th{text-align:left;font-size:11px;line-height:14px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--zacht);padding:10px 16px;background:var(--grijsvlak);border-bottom:1px solid var(--lijn)}
+.t td{padding:12px 16px;border-bottom:1px solid var(--lijn);vertical-align:top}
+.t tr:last-child td{border-bottom:0}
+.t tr.link{cursor:pointer}.t tr.link:hover td{background:var(--grijsvlak)}
 .t .r{text-align:right}
 .tablewrap{overflow-x:auto}
-.badge{display:inline-block;font:600 12px var(--body);padding:3px 9px;border-radius:99px;background:var(--border);color:var(--ink);white-space:nowrap}
-.b-gemeld{background:var(--yellow)}.b-goedgekeurd{background:#f8d9b8}.b-opdracht_gegeven{background:var(--orange)}
-.b-ingepland{background:#cfe0f5}.b-geen_toegang{background:#f1c6c2}.b-bestreden,.b-betaald{background:#bfe0cb}
-.b-gefactureerd{background:#d6e8dc}.b-afgewezen,.b-samengevoegd{background:#e6ddd0;color:var(--mute)}
-.b-concept{background:var(--border)}.b-verstuurd{background:#cfe0f5}.b-te_laat{background:var(--red);color:#fff}
+.card>.t,.card .tablewrap>.t{margin:0}
+.badge{display:inline-block;font:700 11px/14px var(--body);padding:3px 8px;border-radius:var(--r-sm);background:var(--grijsvlak);color:var(--tekst);white-space:nowrap;border:1px solid var(--lijn)}
+.b-gemeld{background:var(--oranjevlak);color:var(--oranjetekst);border-color:#F6C88E}
+.b-goedgekeurd{background:var(--oranjevlak);color:var(--tekst);border-color:#F6C88E}
+.b-opdracht_gegeven,.b-ingepland,.b-verstuurd{background:var(--blauwvlak);color:var(--blauw);border-color:#BCD3EE}
+.b-geen_toegang,.b-te_laat{background:var(--roodvlak);color:var(--rood);border-color:#F1B4AD}
+.b-bestreden,.b-gefactureerd,.b-betaald{background:var(--groenvlak);color:var(--groen);border-color:#A9D8BC}
+.b-afgewezen,.b-samengevoegd,.b-concept{background:var(--grijsvlak);color:var(--zacht)}
+.b-spoed{background:var(--rood);color:#fff;border-color:var(--rood)}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.tabs a{padding:7px 12px;border-radius:99px;text-decoration:none;color:var(--ink);border:1px solid var(--border);font-size:14px}
-.tabs a.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
-.map{height:420px;border-radius:14px;border:1px solid var(--border);overflow:hidden;z-index:0}
-.map.tall{height:60vh}
-.photo{border-radius:10px;border:1px solid var(--border);max-height:320px;object-fit:cover}
+.tabs a{padding:6px 12px;border-radius:var(--r-sm);text-decoration:none;color:var(--tekst);border:1px solid var(--lijn);background:var(--kaart);font-size:13px;font-weight:600}
+.tabs a.on{background:var(--tekst);color:#fff;border-color:var(--tekst)}
+.map{height:420px;border-radius:var(--r-kaart);border:1px solid var(--lijn);overflow:hidden;z-index:0;background:var(--grijsvlak)}
+.map.tall{height:62vh}
+.photo{border-radius:var(--r);border:1px solid var(--lijn);max-height:320px;object-fit:cover}
 .timeline{list-style:none;margin:0;padding:0}
-.timeline li{padding:8px 0 8px 18px;border-left:2px solid var(--border);position:relative}
-.timeline li:before{content:"";position:absolute;left:-6px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--orange)}
-.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;align-items:center;padding:40px 0}
-.hero h1{font-size:60px;line-height:1;letter-spacing:-1.5px}
-.hero p.lead{font-size:20px;line-height:30px;color:var(--mute);max-width:460px}
-.dark{background:var(--ink);color:var(--cream)}
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
-.steps b{display:block;font:800 40px var(--display);color:var(--orange-l)}
-.offline{position:fixed;left:0;right:0;bottom:0;background:var(--yellow);color:var(--ink);text-align:center;padding:8px;font-weight:600;z-index:999;display:none}
+.timeline li{padding:8px 0 8px 18px;border-left:2px solid var(--lijn);position:relative}
+.timeline li:before{content:"";position:absolute;left:-7px;top:13px;width:12px;height:12px;border-radius:50%;background:var(--tekst)}
+.timeline li.on:before{background:var(--oranje)}
+.offline{position:fixed;left:0;right:0;bottom:0;background:var(--oranje);color:var(--op-oranje);text-align:center;padding:8px;font-weight:600;z-index:999;display:none}
 .choice{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
-.choice label{border:1.5px solid var(--border);border-radius:var(--r);padding:12px;text-align:center;cursor:pointer;background:#fffdf8;font-weight:600}
+.choice label{border:1px solid var(--lijn);border-radius:var(--r);padding:12px;text-align:center;cursor:pointer;background:var(--kaart);font-weight:600}
 .choice input{position:absolute;opacity:0}
-.choice input:checked+span{color:var(--brown)}
-.choice label:has(input:checked){border-color:var(--orange);background:#fdf0e2}
+.choice label:has(input:checked){border-color:var(--oranje);background:var(--oranjevlak);box-shadow:inset 0 0 0 1px var(--oranje)}
 .right{text-align:right}
-@media (max-width:640px){h1{font-size:32px}.hero h1{font-size:44px}.map{height:320px}}
-@media print{.top,.foot,.btn,.nav{display:none}}
+pre,code{font-family:var(--mono);font-size:12px}
+details summary{cursor:pointer}
+/* Publieke formulierkaart (melden) */
+.meldkaart{background:var(--kaart);border:1px solid var(--lijn);border-radius:var(--r-xl);padding:24px}
+@media (max-width:640px){h1{font-size:24px;line-height:30px}.wrap{padding:0 16px}main{padding:20px 0 48px}.map{height:320px}.balk nav a{padding:0 8px}}
+@media print{.balk,.foot,.btn,.offline{display:none}body{background:#fff}}

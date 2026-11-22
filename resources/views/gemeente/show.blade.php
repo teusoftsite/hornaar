@@ -3,7 +3,7 @@
 @section('content')
 <p class="small"><a href="{{ route('gemeente.index') }}">← Meldingen</a></p>
 <div class="row between">
-  <h1>Nest #{{ $nest->id }} @include('partials.badge', ['s' => $nest->status]) @if($nest->urgent)<span class="badge b-te_laat">Spoed</span>@endif</h1>
+  <h1>Nest #{{ $nest->id }} @include('partials.badge', ['s' => $nest->status]) @if($nest->urgent)<span class="badge b-spoed">Spoed</span>@endif</h1>
 </div>
 <p class="muted" style="margin-top:-8px">{{ $nest->address ?? 'Adres onbekend' }} · gemeld {{ $nest->created_at->translatedFormat('j F Y H:i') }}@if($nest->location_type) · {{ ucfirst($nest->location_type) }}@endif @if($nest->height_m) · ca. {{ rtrim(rtrim(number_format($nest->height_m, 1, ',', ''), '0'), ',') }} m hoog @endif</p>
 
@@ -13,7 +13,7 @@
     <p class="small"><a target="_blank" rel="noopener" href="https://www.google.com/maps?q={{ $nest->lat }},{{ $nest->lng }}">Open in Google Maps</a> · {{ number_format($nest->lat, 6) }}, {{ number_format($nest->lng, 6) }}</p>
 
     @if($duplicates->isNotEmpty())
-    <div class="card" style="border-color:var(--orange)">
+    <div class="card" style="border-color:var(--oranje)">
       <h3>Mogelijk dubbel</h3>
       <p class="small">Binnen 25 meter ligt al een open melding:</p>
       @foreach($duplicates as $d)
@@ -93,7 +93,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   var m = MH.map('map', [{{ $nest->lat }}, {{ $nest->lng }}], 17);
   MH.pin({{ $nest->lat }}, {{ $nest->lng }}, @json($nest->status)).addTo(m);
-  L.circle([{{ $nest->lat }}, {{ $nest->lng }}], {radius: 25, color: '#ec7a1c', weight: 1, fillOpacity: .05}).addTo(m);
+  L.circle([{{ $nest->lat }}, {{ $nest->lng }}], {radius: 25, color: '#F38B12', weight: 1, fillOpacity: .05}).addTo(m);
   @foreach($duplicates as $d) MH.pin({{ $d->lat }}, {{ $d->lng }}, @json($d->status), '{{ $d->id }}').addTo(m); @endforeach
 });
 </script>

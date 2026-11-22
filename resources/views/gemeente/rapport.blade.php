@@ -9,10 +9,10 @@
   </div>
 </div>
 <div class="grid g4" style="margin-bottom:20px">
-  <div class="card"><div class="stat">{{ $byStatus->sum() }}<small>meldingen (excl. dubbel)</small></div></div>
-  <div class="card"><div class="stat">{{ $cleared }}<small>nesten bestreden</small></div></div>
-  <div class="card"><div class="stat">{{ $byStatus['afgewezen'] ?? 0 }}<small>afgewezen</small></div></div>
-  <div class="card"><div class="stat">{{ \App\Support\Money::format($cost) }}<small>gefactureerd (incl. btw)</small></div></div>
+  <div class="card"><div class="stat">{{ $byStatus->sum() }}<small>Meldingen (excl. dubbel)</small></div></div>
+  <div class="card"><div class="stat">{{ $cleared }}<small>Nesten bestreden</small></div></div>
+  <div class="card"><div class="stat">{{ $byStatus['afgewezen'] ?? 0 }}<small>Afgewezen</small></div></div>
+  <div class="card"><div class="stat">{{ \App\Support\Money::format($cost) }}<small>Gefactureerd (incl. btw)</small></div></div>
 </div>
 <div class="grid g2" style="align-items:start">
   <div class="card white">
@@ -22,9 +22,9 @@
       @foreach(range(1, 12) as $m)
         @php($v = $byMonth[$m] ?? 0)
         @php($h = round($v / $max * 120))
-        <rect x="{{ ($m - 1) * 30 + 4 }}" y="{{ 130 - $h }}" width="22" height="{{ $h }}" rx="3" fill="#ec7a1c"><title>{{ $v }}</title></rect>
-        <text x="{{ ($m - 1) * 30 + 15 }}" y="148" font-size="10" text-anchor="middle" fill="#6b6156">{{ ['j','f','m','a','m','j','j','a','s','o','n','d'][$m - 1] }}</text>
-        @if($v)<text x="{{ ($m - 1) * 30 + 15 }}" y="{{ 126 - $h }}" font-size="10" text-anchor="middle" fill="#1c1712">{{ $v }}</text>@endif
+        <rect x="{{ ($m - 1) * 30 + 4 }}" y="{{ 130 - $h }}" width="22" height="{{ $h }}" rx="3" fill="#F38B12"><title>{{ $v }}</title></rect>
+        <text x="{{ ($m - 1) * 30 + 15 }}" y="148" font-size="10" text-anchor="middle" fill="#5B6169">{{ ['j','f','m','a','m','j','j','a','s','o','n','d'][$m - 1] }}</text>
+        @if($v)<text x="{{ ($m - 1) * 30 + 15 }}" y="{{ 126 - $h }}" font-size="10" text-anchor="middle" fill="#17181B">{{ $v }}</text>@endif
       @endforeach
     </svg>
   </div>

@@ -1,6 +1,6 @@
 /* Service worker: app-schil + bekeken pagina's offline beschikbaar (network-first). */
-const CACHE = 'mh-v1';
-const SHELL = ['/css/app.css?v=1', '/js/app.js?v=1', '/js/map.js?v=1', '/logo.svg', '/favicon.svg'];
+const CACHE = 'mh-v2';
+const SHELL = ['/css/app.css?v=2', '/js/app.js?v=2', '/js/map.js?v=2', '/logo.svg', '/favicon.svg'];
 self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', e => {

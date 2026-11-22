@@ -9,10 +9,10 @@
 <form id="meld" method="post" action="{{ route('melden.store') }}" enctype="multipart/form-data" class="grid g2" style="align-items:start">
   @csrf
   <div class="card stack">
-    <label class="btn big" for="photo"><span id="fotostatus">1. Maak een foto</span></label>
+    <label class="btn dark big" for="photo"><span id="fotostatus">1. Maak een foto</span></label>
     <input id="photo" type="file" name="photo" accept="image/*" capture="environment" style="position:absolute;width:1px;height:1px;opacity:0">
     <img id="preview" class="photo" alt="" hidden>
-    <button type="button" id="locbtn" class="btn big">2. Gebruik mijn locatie</button>
+    <button type="button" id="locbtn" class="btn dark big">2. Gebruik mijn locatie</button>
     <p class="small muted" style="margin:0">Of tik op de kaart waar het nest zit. Je kunt de pin verslepen.</p>
     <div id="pickmap" class="map"></div>
     <input type="hidden" name="lat" id="lat" value="{{ old('lat') }}"><input type="hidden" name="lng" id="lng" value="{{ old('lng') }}">

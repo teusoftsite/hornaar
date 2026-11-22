@@ -1,13 +1,13 @@
 @extends('layouts.app', ['title' => 'Opdrachten'])
 @section('content')
 <h1>Opdrachten</h1>
-<p id="queue" class="small" style="color:var(--brown)"></p>
+<p id="queue" class="small" style="color:var(--oranjetekst)"></p>
 <div class="tablewrap card white" style="padding:0">
 <table class="t">
   <thead><tr><th>Nest</th><th>Gemeente</th><th>Status</th><th>Plannen</th><th></th></tr></thead>
   @forelse($assignments as $a)
   <tr>
-    <td><strong>{{ $a->nest->address ?? '#' . $a->nest->id }}</strong> @if($a->nest->urgent)<span class="badge b-te_laat">Spoed</span>@endif<br>
+    <td><strong>{{ $a->nest->address ?? '#' . $a->nest->id }}</strong> @if($a->nest->urgent)<span class="badge b-spoed">Spoed</span>@endif<br>
       <span class="small muted">#{{ $a->nest->id }} @if($a->nest->location_type)· {{ $a->nest->location_type }}@endif @if($a->nest->height_m)· {{ $a->nest->height_m }} m @endif · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination={{ $a->nest->lat }},{{ $a->nest->lng }}">navigeer</a></span></td>
     <td>{{ $a->contract->gemeente->name }}</td>
     <td>@include('partials.badge', ['s' => $a->status === 'open' ? 'opdracht_gegeven' : 'ingepland'])@if($a->planned_on)<br><span class="small">{{ $a->planned_on->translatedFormat('D j M') }}{{ $a->assignee ? ' · ' . $a->assignee->name : '' }}</span>@endif</td>

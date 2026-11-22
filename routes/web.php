@@ -16,6 +16,10 @@ Route::post('/melden', [ReportController::class, 'store'])->middleware('throttle
 Route::get('/m/{token}', [ReportController::class, 'status'])->name('melding.status');
 Route::get('/zakelijk', [PageController::class, 'zakelijk'])->name('zakelijk');
 Route::post('/zakelijk/contact', [PageController::class, 'contact'])->middleware('throttle:5,60')->name('zakelijk.contact');
+Route::view('/info', 'public.info-verhaal')->name('info');
+foreach (['herkennen', 'jaarcyclus', 'nesten-zoeken', 'achtergrond', 'vragen'] as $page) {
+    Route::view('/info/' . $page, 'public.info-' . $page)->name('info.' . $page);
+}
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/foto/{path}', PhotoController::class)->where('path', '.*')->middleware('signed')->name('foto');
 
