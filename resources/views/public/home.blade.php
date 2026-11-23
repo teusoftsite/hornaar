@@ -27,22 +27,22 @@
 
 <section style="max-width: 1100px; margin: 0 auto; padding: 0 24px 72px; display: flex; flex-direction: column; gap: 20px">
 <figure style="margin: 0; position: relative; border-radius: 12px; overflow: hidden">
-<img src="/img/info/6a8640ec99196a11072911c7a45be953.jpg" alt="Aziatische hoornaar van opzij: zwart borststuk, één oranje band, gele pootpunten" style="width: 100%; height: 420px; object-fit: cover; display: block">
+<img src="/img/info/hoornaar.jpg" alt="Aziatische hoornaar op een paaltje: zwart borststuk, één oranje band, gele pootpunten" style="width: 100%; height: 420px; object-fit: cover; display: block">
 <figcaption style="position: absolute; left: 0; right: 0; bottom: 0; padding: 48px 28px 22px; background: linear-gradient(transparent, rgba(23,24,27,.85)); color: #F2F3F5; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
 <span style="display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 28px; letter-spacing: -.5px">Zo herken je hem</strong><span style="font-size: 16px">Zwart borststuk, één oranje band, gele pootpunten.</span></span>
-<span style="font-size: 11px; color: #C9CDD2">AI-beeld, naar foto van Vespa-Watch (INBO), CC BY 4.0</span></figcaption></figure>
+</figcaption></figure>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px">
 <a href="{{ route('info.herkennen') }}" style="background: #FFFFFF; border: 1px solid #DCE0E4; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: #17181B">
-<img src="/img/info/44deab85b484bc27d424972734ca04d7.jpg" alt="Aziatische en Europese hoornaar naast elkaar" loading="lazy" style="width: 100%; height: 220px; object-fit: cover; display: block">
+<img src="/img/info/vergelijking.jpg" alt="Aziatische en Europese hoornaar naast elkaar" loading="lazy" style="width: 100%; height: 220px; object-fit: cover; display: block">
 <span style="padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 6px"><strong style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 18px; color: #B85F00">Aziatisch of Europees? →</strong><span style="font-size: 14px; line-height: 21px; color: #5B6169; font-weight: 400">De Europese hoornaar is roodbruin met veel geel en mag blijven. Zie het verschil.</span></span></a>
 <a href="{{ route('info.nesten-zoeken') }}" style="background: #FFFFFF; border: 1px solid #DCE0E4; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: #17181B">
-<img src="/img/info/9a982e969d75f4b618ac4ad286a7763f.jpg" alt="Voorjaarsnest onder een afdak" loading="lazy" style="width: 100%; height: 220px; object-fit: cover; display: block">
+<img src="/img/info/voorjaarsnest.jpg" alt="Voorjaarsnest onder een afdak" loading="lazy" style="width: 100%; height: 220px; object-fit: cover; display: block">
 <span style="padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 6px"><strong style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 18px; color: #B85F00">Voorjaarsnest →</strong><span style="font-size: 14px; line-height: 21px; color: #5B6169; font-weight: 400">April tot juni: klein en bol, onder een afdak, in een schuur of carport.</span></span></a>
 <a href="{{ route('info.nesten-zoeken') }}" style="background: #FFFFFF; border: 1px solid #DCE0E4; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: #17181B">
-<img src="/img/info/495bd1a17692afb7432d59717ca259be.jpg" alt="Zomernest hoog in een eik" loading="lazy" style="width: 100%; height: 220px; object-fit: cover; display: block">
+<img src="/img/info/zomernest.jpg" alt="Zomernest hoog in een eik" loading="lazy" style="width: 100%; height: 220px; object-fit: cover; display: block">
 <span style="padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 6px"><strong style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 18px; color: #B85F00">Zomernest →</strong><span style="font-size: 14px; line-height: 21px; color: #5B6169; font-weight: 400">Vanaf juli: groot, hoog in een boom, opening aan de zijkant. Goed te zien als de bladeren vallen.</span></span></a>
 </div>
-<p style="margin: 0; font-size: 12px; color: #5B6169">Foto's: AI-beeld, naar foto van Vespa-Watch (INBO), CC BY 4.0. <a href="{{ route('info') }}">Alles over de Aziatische hoornaar</a></p>
+<p style="margin: 0; font-size: 12px; color: #5B6169"><a href="{{ route('info') }}">Alles over de Aziatische hoornaar →</a></p>
 </section>
 <section style="background: #17181B; color: #F2F3F5">
 <div style="max-width: 1100px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 32px">
