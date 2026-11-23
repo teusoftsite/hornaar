@@ -29,3 +29,8 @@
   </div>
 </div>
 @endsection
+@if(request()->boolean('nieuw'))
+@push('scripts')
+<script>if (window.mhEvent) mhEvent('melding_verstuurd', {gemeente: @json($nest->gemeente?->name ?? 'onbekend')}); if (history.replaceState) history.replaceState(null, '', location.pathname);</script>
+@endpush
+@endif

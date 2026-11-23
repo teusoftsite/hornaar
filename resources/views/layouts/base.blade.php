@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/css/app.css?v=2">
 @stack('head')
+@include('partials.analytics')
 </head>
 <body>
 @yield('body')

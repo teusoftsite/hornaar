@@ -9,7 +9,8 @@
   <li>Je e-mailadres gebruiken we alleen om je updates over dit nest te sturen. We verwijderen het 90 dagen nadat het nest is afgehandeld.</li>
   <li>Je IP-adres slaan we niet op; alleen een onomkeerbare code om misbruik te voorkomen.</li>
   <li>We delen je melding alleen met de gemeente en de bestrijder die het nest weghaalt.</li>
-  <li>We verkopen niets door en gebruiken geen tracking-cookies.</li>
+  <li>We verkopen niets door.</li>
+  <li>Alleen als je daar toestemming voor geeft, plaatsen we cookies van Google Analytics. Daarmee zien we hoe de site gebruikt wordt en meten we het effect van onze advertenties. Je IP-adres wordt daarbij ingekort. Zonder toestemming plaatst Google geen cookies. Je keuze wijzigen kan via <a href="#" data-mh-cookies>Cookies</a> onderaan elke pagina.</li>
 </ul>
 <p>Vragen of je gegevens laten verwijderen? Mail naar <a href="mailto:info@meldhoornaar.nl">info@meldhoornaar.nl</a>.</p>
 </div>

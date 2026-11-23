@@ -39,7 +39,7 @@ class ReportController extends Controller
         }
 
         $report = $service->create($data, $request->file('photo'), $request->ip());
-        $url = route('melding.status', $report->token);
+        $url = route('melding.status', ['token' => $report->token, 'nieuw' => 1]);
 
         return $request->expectsJson()
             ? response()->json(['id' => $report->nest_id, 'status_url' => $url, 'gemeente' => $report->nest->gemeente?->name], 201)
