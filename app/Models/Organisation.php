@@ -15,7 +15,7 @@ class Organisation extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = ['active' => 'boolean', 'base_lat' => 'float', 'base_lng' => 'float'];
+    protected $casts = ['active' => 'boolean', 'base_lat' => 'float', 'base_lng' => 'float', 'accepts_leads' => 'boolean'];
 
     public function users(): HasMany
     {

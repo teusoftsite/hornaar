@@ -56,4 +56,15 @@ class Nest extends Model
     {
         return in_array($this->status, NestStatus::OPEN, true);
     }
+
+    public function leads(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Lead::class);
+    }
+
+    /** Geen deelnemende gemeente: de inwoner regelt zelf een bestrijder via MeldHoornaar. */
+    public function isParticulier(): bool
+    {
+        return $this->gemeente_id === null;
+    }
 }

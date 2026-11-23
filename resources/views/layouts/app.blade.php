@@ -11,12 +11,14 @@
       <a href="{{ route('bestrijder.index') }}" class="{{ request()->routeIs('bestrijder.index') ? 'on' : '' }}">Overzicht</a>
       <a href="{{ route('bestrijder.opdrachten') }}" class="{{ request()->routeIs('bestrijder.opdrachten','bestrijder.werkbon') ? 'on' : '' }}">Opdrachten</a>
       <a href="{{ route('bestrijder.route') }}" class="{{ request()->routeIs('bestrijder.route') ? 'on' : '' }}">Avondroute</a>
+      <a href="{{ route('bestrijder.leads') }}" class="{{ request()->routeIs('bestrijder.leads') ? 'on' : '' }}">Particulier</a>
       @if($u->isBestrijderEigenaar())
       <a href="{{ route('bestrijder.facturen') }}" class="{{ request()->routeIs('bestrijder.facturen*') ? 'on' : '' }}">Facturen</a>
       <a href="{{ route('bestrijder.instellingen') }}" class="{{ request()->routeIs('bestrijder.instellingen') ? 'on' : '' }}">Instellingen</a>
       @endif
     @elseif($u->isBeheerder())
-      <a href="{{ route('beheer.index') }}" class="{{ request()->routeIs('beheer.*') ? 'on' : '' }}">Beheer</a>
+      <a href="{{ route('beheer.index') }}" class="{{ request()->routeIs('beheer.index', 'beheer.organisaties.*') ? 'on' : '' }}">Beheer</a>
+      <a href="{{ route('beheer.leads') }}" class="{{ request()->routeIs('beheer.leads') ? 'on' : '' }}">Particulier</a>
     @endif
   </nav>
   <div class="rechts">

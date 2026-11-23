@@ -41,7 +41,8 @@ Organisatiescheiding zit in de controllers (404 bij andermans gegevens) en is ge
 2. **Gemeente** beoordeelt → goedkeuren/afwijzen; meldingen binnen 25 m worden als dubbel voorgesteld en samengevoegd; opdracht via actief contract.
 3. **Bestrijder** plant (datum + medewerker), optimaliseert de dagroute, vult de werkbon in (werkt offline: IndexedDB-wachtrij, idempotent op `client_uuid`).
 4. **Facturatie**: werkbon → factuurregel (bestreden = tarief + toeslagen, geen toegang = voorrijkosten, geen nest = niets). De 1e van de maand om 06:00 → conceptfactuur per contract. Versturen geeft nummer `JJJJ-NNNN` per bestrijder, PDF, mail aan gemeente. Verstuurd = onveranderbaar → creditfactuur. Te laat + herinneringen na 7 en 14 dagen.
-5. **AVG**: e-mail melder gewist 90 dagen na afsluiten, IP alleen gehasht, foto's alleen via ondertekende URL (1 uur).
+5. **Particulier** (geen deelnemende gemeente): op de statuspagina vraagt de inwoner een bestrijder aan (naam, telefoon, toestemming). De lead gaat naar de dichtstbijzijnde bestrijder met `accepts_leads` binnen zijn `service_radius_km`. Hij heeft `MELDHOORNAAR_LEAD_HOURS` (4) uur; weigeren of verlopen (`leads:doorzetten`, elk kwartier) → volgende. Accepteren kost `MELDHOORNAAR_LEAD_FEE` (€ 10) excl. btw; pas dan ziet hij naam en telefoon. De inwoner betaalt de bestrijder zelf. De 1e van de maand → conceptfactuur per bestrijder (`MH-JJJJ-NNNN`), te versturen via Beheer → Particulier (vereist `MH_SELLER_KVK` en `MH_SELLER_IBAN`).
+6. **AVG**: e-mail melder gewist 90 dagen na afsluiten, IP alleen gehasht, foto's alleen via ondertekende URL (1 uur).
 
 ## Lokaal draaien
 
@@ -85,7 +86,8 @@ Google Analytics 4 (property MeldHoornaar.nl, meet-ID in `.env` als `GA_MEASUREM
 | Commando | Doel |
 |---|---|
 | `grenzen:import {bron?} --jaar=` | Gemeentegrenzen importeren (GeoJSON, WGS84) |
-| `facturen:maand --datum=` | Conceptfacturen maken voor de vorige maand |
+| `facturen:maand --datum=` | Conceptfacturen (gemeenten + leads) maken voor de vorige maand |
+| `leads:doorzetten` | Verlopen leadaanbiedingen doorzetten naar de volgende bestrijder |
 | `facturen:herinneringen` | Te laat markeren + herinneringen |
 | `privacy:opschonen` | E-mailadressen van melders wissen |
 

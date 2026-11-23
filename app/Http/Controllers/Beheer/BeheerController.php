@@ -57,7 +57,7 @@ class BeheerController extends Controller
         $org = Organisation::create($data);
         if ($org->isGemeente()) {
             // Eerdere meldingen in deze gemeente die nog nergens heen konden, nu koppelen.
-            Nest::whereNull('gemeente_id')->where('cbs_code', $org->cbs_code)->update(['gemeente_id' => $org->id]);
+            Nest::whereNull('gemeente_id')->where('cbs_code', $org->cbs_code)->whereDoesntHave('leads')->update(['gemeente_id' => $org->id]);
         }
         return redirect()->route('beheer.organisaties.show', $org)->with('status', 'Organisatie aangemaakt.');
     }

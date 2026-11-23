@@ -14,6 +14,7 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/melden', [ReportController::class, 'create'])->name('melden');
 Route::post('/melden', [ReportController::class, 'store'])->middleware('throttle:reports')->name('melden.store');
 Route::get('/m/{token}', [ReportController::class, 'status'])->name('melding.status');
+Route::post('/m/{token}/bestrijder', [ReportController::class, 'requestBestrijder'])->middleware('throttle:10,60')->name('melding.bestrijder');
 Route::get('/zakelijk', [PageController::class, 'zakelijk'])->name('zakelijk');
 Route::post('/zakelijk/contact', [PageController::class, 'contact'])->middleware('throttle:5,60')->name('zakelijk.contact');
 Route::view('/info', 'public.info-verhaal')->name('info');
@@ -49,6 +50,10 @@ Route::middleware(['auth', '2fa'])->group(function () {
         Route::post('/route/optimaliseren', [Bestrijder\RouteController::class, 'optimize'])->name('route.optimize');
         Route::get('/werkbon/{assignment}', [Bestrijder\WorkOrderController::class, 'show'])->name('werkbon');
         Route::post('/werkbon/{assignment}', [Bestrijder\WorkOrderController::class, 'store'])->name('werkbon.store');
+        Route::get('/particulier', [Bestrijder\LeadController::class, 'index'])->name('leads');
+        Route::post('/particulier/{lead}/accepteren', [Bestrijder\LeadController::class, 'accept'])->name('leads.accept');
+        Route::post('/particulier/{lead}/weigeren', [Bestrijder\LeadController::class, 'decline'])->name('leads.decline');
+        Route::post('/particulier/{lead}/afronden', [Bestrijder\LeadController::class, 'complete'])->name('leads.complete');
 
         Route::middleware('role:bestrijder_eigenaar')->group(function () {
             Route::get('/facturen', [Bestrijder\InvoiceController::class, 'index'])->name('facturen');
@@ -75,5 +80,9 @@ Route::middleware(['auth', '2fa'])->group(function () {
         Route::post('/gebruikers/{user}/actief', [Beheer\BeheerController::class, 'toggleUser'])->name('gebruikers.toggle');
         Route::post('/contracten', [Beheer\BeheerController::class, 'storeContract'])->name('contracten.store');
         Route::post('/nesten/{nest}/gemeente', [Beheer\BeheerController::class, 'routeNest'])->name('nesten.route');
+        Route::get('/particulier', [Beheer\LeadAdminController::class, 'index'])->name('leads');
+        Route::post('/particulier/facturen/{leadInvoice}/versturen', [Beheer\LeadAdminController::class, 'send'])->name('leadfacturen.send');
+        Route::post('/particulier/facturen/{leadInvoice}/betaald', [Beheer\LeadAdminController::class, 'paid'])->name('leadfacturen.paid');
+        Route::get('/particulier/facturen/{leadInvoice}/pdf', [Beheer\LeadAdminController::class, 'pdf'])->name('leadfacturen.pdf');
     });
 });

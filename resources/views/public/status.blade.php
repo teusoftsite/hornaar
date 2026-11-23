@@ -19,7 +19,33 @@
         @endforeach
       </ol>
     @endif
-    <p class="muted">{{ $nest->gemeente ? 'Gemeente: ' . $nest->gemeente->name : 'Je gemeente doet nog niet mee met MeldHoornaar. We sturen je melding door naar de juiste instantie.' }}</p>
+    @if($nest->gemeente)
+      <p class="muted">Gemeente: {{ $nest->gemeente->name }}</p>
+    @elseif(! $lead && $nest->status === 'gemeld' && ! $nest->mergedInto)
+      <div class="card stack" style="border-color:var(--oranje)">
+        <h3 style="margin:0">Een bestrijder laten komen</h3>
+        <p style="margin:0">Je gemeente haalt nesten niet (meer) zelf weg. Wij zoeken de dichtstbijzijnde bestrijder voor je. Die belt je, spreekt een prijs af en rekent met je af. MeldHoornaar zelf is gratis.</p>
+        <form method="post" action="{{ route('melding.bestrijder', $report->token) }}" class="stack">@csrf
+          <label class="f">Naam<input name="name" value="{{ old('name') }}" required autocomplete="name"></label>
+          <label class="f">Telefoon<input name="phone" type="tel" value="{{ old('phone') }}" required autocomplete="tel"></label>
+          <label class="f">E-mail (voor updates)<input name="email" type="email" value="{{ old('email', $report->reporter_email) }}" autocomplete="email"></label>
+          <label class="row small"><input type="checkbox" name="akkoord" value="1" required> Ik geef toestemming om mijn naam, telefoonnummer en de plek van het nest te delen met de bestrijder.</label>
+          <button class="btn orange">Bestrijder vragen</button>
+        </form>
+      </div>
+    @elseif($lead)
+      <div class="card stack">
+        <h3 style="margin:0">Bestrijder</h3>
+        @switch($lead->status)
+          @case('zoeken') @case('aangeboden')
+            <p style="margin:0">We zoeken een bestrijder bij jou in de buurt. Je hoort het zo snel mogelijk.</p> @break
+          @case('geaccepteerd') @case('afgerond')
+            <p style="margin:0"><strong>{{ $lead->bestrijder?->name }}</strong> komt je nest weghalen en neemt contact met je op.@if($lead->bestrijder?->phone) Telefoon: <a href="tel:{{ preg_replace('/[^0-9+]/', '', $lead->bestrijder->phone) }}">{{ $lead->bestrijder->phone }}</a>@endif</p> @break
+          @default
+            <p style="margin:0">Op dit moment is er geen bestrijder beschikbaar. We zoeken verder en nemen contact met je op.</p>
+        @endswitch
+      </div>
+    @endif
     <p class="small muted">Bewaar deze pagina om je melding te volgen.</p>
   </div>
   <div class="card stack">

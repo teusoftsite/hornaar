@@ -48,8 +48,30 @@ class ReportController extends Controller
 
     public function status(string $token)
     {
-        $report = Report::where('token', $token)->with('nest.events', 'nest.gemeente', 'nest.mergedInto')->firstOrFail();
+        $report = Report::where('token', $token)->with('nest.events', 'nest.gemeente', 'nest.mergedInto', 'nest.leads.bestrijder')->firstOrFail();
         $nest = $report->nest;
-        return view('public.status', compact('report', 'nest'));
+        $lead = $nest->leads->sortByDesc('id')->first();
+        return view('public.status', compact('report', 'nest', 'lead'));
+    }
+
+    /** Particulier: geen deelnemende gemeente, inwoner vraagt een bestrijder. */
+    public function requestBestrijder(Request $request, string $token, \App\Services\LeadService $leads)
+    {
+        $report = Report::where('token', $token)->firstOrFail();
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:120'],
+            'phone' => ['required', 'string', 'max:30', 'regex:/^[0-9 +()\-]{8,}$/'],
+            'email' => ['nullable', 'email', 'max:190'],
+            'akkoord' => ['accepted'],
+        ], [
+            'phone.regex' => 'Vul een geldig telefoonnummer in.',
+            'akkoord.accepted' => 'Geef toestemming om je gegevens met de bestrijder te delen.',
+        ]);
+        try {
+            $leads->request($report, $data);
+        } catch (\DomainException $e) {
+            return back()->withErrors(['name' => $e->getMessage()]);
+        }
+        return redirect()->route('melding.status', $token)->with('status', 'We zoeken een bestrijder bij jou in de buurt. Je hoort het zo snel mogelijk.');
     }
 }

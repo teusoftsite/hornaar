@@ -14,7 +14,13 @@
       <label class="f">Btw-tarief<select name="vat_rate">@foreach([21, 9, 0] as $r)<option value="{{ $r }}" @selected($org->vat_rate == $r)>{{ $r }}%</option>@endforeach</select></label>
     </div>
     <label class="f">E-mail facturen (antwoordadres)<input type="email" name="invoice_email" value="{{ old('invoice_email', $org->invoice_email) }}"></label>
-    <label class="f">E-mail nieuwe opdrachten<input type="email" name="notify_email" value="{{ old('notify_email', $org->notify_email) }}"></label>
+    <label class="f">E-mail nieuwe opdrachten en aanvragen<input type="email" name="notify_email" value="{{ old('notify_email', $org->notify_email) }}"></label>
+    <label class="f">Telefoon (inwoners zien dit na accepteren)<input name="phone" value="{{ old('phone', $org->phone) }}"></label>
+    <div class="card flat stack" style="padding:12px 16px">
+      <label class="row"><input type="checkbox" name="accepts_leads" value="1" @checked(old('accepts_leads', $org->accepts_leads))> <strong>Particuliere aanvragen ontvangen</strong></label>
+      <p class="small muted" style="margin:0">Inwoners zonder deelnemende gemeente krijgen de dichtstbijzijnde bestrijder. U heeft {{ config('meldhoornaar.lead_response_hours') }} uur om te reageren. Accepteren kost {{ \App\Support\Money::format(config('meldhoornaar.lead_fee_cents')) }} excl. btw, weigeren is gratis.</p>
+      <label class="f">Werkgebied (km rond de werkplaats)<input type="number" name="service_radius_km" min="5" max="150" value="{{ old('service_radius_km', $org->service_radius_km ?? 25) }}" required></label>
+    </div>
     <div class="f" style="font-size:13px;font-weight:600">Werkplaats (start en eind van de route) – tik op de kaart</div>
     <div id="basemap" class="map" style="height:260px"></div>
     <input type="hidden" name="base_lat" id="blat" value="{{ $org->base_lat }}"><input type="hidden" name="base_lng" id="blng" value="{{ $org->base_lng }}">

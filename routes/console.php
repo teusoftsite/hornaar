@@ -6,3 +6,4 @@ use Illuminate\Support\Facades\Schedule;
 Schedule::command('facturen:maand')->monthlyOn(1, '06:00')->timezone('Europe/Amsterdam');
 Schedule::command('facturen:herinneringen')->dailyAt('07:00')->timezone('Europe/Amsterdam');
 Schedule::command('privacy:opschonen')->dailyAt('03:00')->timezone('Europe/Amsterdam');
+Schedule::command('leads:doorzetten')->everyFifteenMinutes();

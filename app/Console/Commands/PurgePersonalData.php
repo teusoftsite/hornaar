@@ -19,7 +19,11 @@ class PurgePersonalData extends Command
         $n = Report::whereNotNull('reporter_email')
             ->whereHas('nest', fn ($q) => $q->whereIn('status', $closed)->where('updated_at', '<', now()->subDays(config('meldhoornaar.purge_reporter_email_days'))))
             ->update(['reporter_email' => null]);
-        $this->info("{$n} e-mailadres(sen) gewist.");
+        $l = \App\Models\Lead::whereIn('status', ['afgerond', 'geen_bestrijder', 'geannuleerd'])
+            ->where('updated_at', '<', now()->subDays(config('meldhoornaar.purge_reporter_email_days')))
+            ->where('name', '!=', 'gewist')
+            ->update(['name' => 'gewist', 'phone' => '-', 'email' => null]);
+        $this->info("{$n} e-mailadres(sen) en {$l} aanvraag/aanvragen gewist.");
         return self::SUCCESS;
     }
 }

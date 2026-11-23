@@ -28,9 +28,10 @@ final class NestStatus
 
     /** Toegestane overgangen. */
     public const FLOW = [
-        self::GEMELD => [self::GOEDGEKEURD, self::AFGEWEZEN, self::SAMENGEVOEGD],
+        // Particulier: gemeld -> opdracht_gegeven (bestrijder accepteert) -> bestreden / afgewezen.
+        self::GEMELD => [self::GOEDGEKEURD, self::AFGEWEZEN, self::SAMENGEVOEGD, self::OPDRACHT],
         self::GOEDGEKEURD => [self::OPDRACHT, self::AFGEWEZEN],
-        self::OPDRACHT => [self::INGEPLAND, self::GOEDGEKEURD],
+        self::OPDRACHT => [self::INGEPLAND, self::GOEDGEKEURD, self::BESTREDEN, self::AFGEWEZEN, self::GEMELD],
         self::INGEPLAND => [self::BESTREDEN, self::GEEN_TOEGANG, self::AFGEWEZEN, self::OPDRACHT],
         self::GEEN_TOEGANG => [self::INGEPLAND, self::OPDRACHT],
         self::BESTREDEN => [self::GEFACTUREERD],

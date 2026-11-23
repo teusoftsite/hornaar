@@ -31,7 +31,13 @@ class SettingsController extends Controller
             'vat_rate' => ['required', 'integer', 'in:0,9,21'],
             'base_lat' => ['nullable', 'numeric', 'between:50.7,53.6'],
             'base_lng' => ['nullable', 'numeric', 'between:3.3,7.3'],
+            'phone' => ['nullable', 'string', 'max:30'],
+            'service_radius_km' => ['required', 'integer', 'between:5,150'],
         ]);
+        $data['accepts_leads'] = $request->boolean('accepts_leads');
+        if ($data['accepts_leads'] && (empty($data['base_lat']) || empty($data['phone']))) {
+            return back()->withErrors(['accepts_leads' => 'Voor particuliere aanvragen zijn een werkplaats op de kaart en een telefoonnummer nodig.'])->withInput();
+        }
         $this->org()->update($data);
         return back()->with('status', 'Gegevens opgeslagen.');
     }
