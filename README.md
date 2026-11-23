@@ -76,6 +76,10 @@ php artisan serve
 9. **SSL**: Let's Encrypt in Plesk, HTTPS-redirect aan.
 10. **Back-up**: Plesk Backup Manager dagelijks (database + `storage/app`, daar staan foto's en PDF's).
 
+## Analytics
+
+Google Analytics 4 (property MeldHoornaar.nl, meet-ID in `.env` als `GA_MEASUREMENT_ID`). Alleen op publieke pagina's, met cookiebanner en Consent Mode v2: zonder toestemming geen cookies. Belangrijke gebeurtenis (conversie): `melding_verstuurd`, afgevuurd op de statuspagina direct na een nieuwe melding. Klikken op mail- en telefoonlinks: `contact_mail` / `contact_bellen`.
+
 ## Artisan-commando's
 
 | Commando | Doel |
