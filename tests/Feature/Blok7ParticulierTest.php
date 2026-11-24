@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 function particulierMelding(float $lat = 51.575, float $lng = 4.641): Report
 {
-    $n = Nest::create(['gemeente_id' => null, 'lat' => $lat, 'lng' => $lng, 'address' => 'Tuinstraat 1', 'status' => 'gemeld']);
+    $n = Nest::create(['gemeente_id' => null, 'lat' => $lat, 'lng' => $lng, 'address' => 'Tuinstraat 1', 'status' => 'gemeld', 'plek' => 'eigen']);
     return Report::create(['nest_id' => $n->id, 'token' => Str::random(32), 'lat' => $lat, 'lng' => $lng, 'reporter_email' => 'inwoner@example.org']);
 }
 
@@ -31,12 +31,11 @@ function vraagBestrijder($test, Report $r): void
     $test->post("/m/{$r->token}/bestrijder", ['name' => 'Jan Inwoner', 'phone' => '06 12345678', 'email' => 'inwoner@example.org', 'akkoord' => '1'])->assertRedirect();
 }
 
-it('toont het aanvraagformulier alleen zonder deelnemende gemeente', function () {
+it('toont het aanvraagformulier alleen bij eigen terrein', function () {
     $r = particulierMelding();
     $this->get("/m/{$r->token}")->assertOk()->assertSee('Bestrijder vragen');
 
-    $g = gemeente();
-    $r->nest->update(['gemeente_id' => $g->id]);
+    $r->nest->update(['plek' => 'openbaar']);
     $this->get("/m/{$r->token}")->assertOk()->assertDontSee('Bestrijder vragen');
 });
 
@@ -126,4 +125,16 @@ it('maakt maandelijks een leadfactuur per bestrijder', function () {
     $this->actingAs($admin)->post("/beheer/particulier/facturen/{$inv->id}/versturen")->assertRedirect();
     expect($inv->fresh()->number)->toStartWith('MH-')->and($inv->fresh()->status)->toBe('verstuurd');
     $this->actingAs($admin)->get("/beheer/particulier/facturen/{$inv->id}/pdf")->assertOk();
+});
+
+it('stuurt eigen terrein niet naar de gemeente, openbare plek wel', function () {
+    $g = gemeente();
+    $eigen = $this->postJson('/api/reports', ['plek' => 'eigen', 'lat' => 51.5751, 'lng' => 4.6412])->assertCreated()->json('id');
+    $openbaar = $this->postJson('/api/reports', ['plek' => 'openbaar', 'lat' => 51.5751, 'lng' => 4.6412])->assertCreated()->json('id');
+    expect(Nest::find($eigen)->gemeente_id)->toBeNull()->and(Nest::find($eigen)->isParticulier())->toBeTrue();
+    expect(Nest::find($openbaar)->gemeente_id)->toBe($g->id);
+    $this->postJson('/api/reports', ['lat' => 51.5751, 'lng' => 4.6412])->assertJsonValidationErrors('plek');
+    $this->get('/melden')->assertOk()->assertSee('Op mijn eigen terrein')->assertSee('Wat gebeurt er na je melding?');
+    $this->get('/info')->assertRedirect('/');
+    $this->get('/')->assertOk()->assertSee('Meld een nest')->assertSee('Hoofdstuk 7');
 });

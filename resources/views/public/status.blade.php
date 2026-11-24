@@ -19,12 +19,12 @@
         @endforeach
       </ol>
     @endif
-    @if($nest->gemeente)
-      <p class="muted">Gemeente: {{ $nest->gemeente->name }}</p>
+    @if(! $nest->isParticulier())
+      <p class="muted">{{ $nest->gemeente ? 'Gemeente: ' . $nest->gemeente->name : 'Openbare plek: we sturen je melding door naar de gemeente.' }}</p>
     @elseif(! $lead && $nest->status === 'gemeld' && ! $nest->mergedInto)
       <div class="card stack" style="border-color:var(--oranje)">
         <h3 style="margin:0">Een bestrijder laten komen</h3>
-        <p style="margin:0">Je gemeente haalt nesten niet (meer) zelf weg. Wij zoeken de dichtstbijzijnde bestrijder voor je. Die belt je, spreekt een prijs af en rekent met je af. MeldHoornaar zelf is gratis.</p>
+        <p style="margin:0">Het nest hangt op je eigen terrein. Wij zoeken de dichtstbijzijnde bestrijder voor je. Die belt je, spreekt een prijs af en rekent met je af. MeldHoornaar zelf is gratis.</p>
         <form method="post" action="{{ route('melding.bestrijder', $report->token) }}" class="stack">@csrf
           <label class="f">Naam<input name="name" value="{{ old('name') }}" required autocomplete="name"></label>
           <label class="f">Telefoon<input name="phone" type="tel" value="{{ old('phone') }}" required autocomplete="tel"></label>

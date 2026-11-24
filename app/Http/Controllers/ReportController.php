@@ -17,6 +17,7 @@ class ReportController extends Controller
     public function store(Request $request, ReportService $service, Turnstile $turnstile)
     {
         $data = $request->validate([
+            'plek' => ['required', 'in:eigen,openbaar'],
             'lat' => ['required', 'numeric', 'between:50.7,53.6'],
             'lng' => ['required', 'numeric', 'between:3.3,7.3'],
             'photo' => ['nullable', 'image', 'max:12288'],
@@ -25,6 +26,7 @@ class ReportController extends Controller
             'note' => ['nullable', 'string', 'max:1000'],
             'email' => ['nullable', 'email', 'max:190'],
         ], [
+            'plek.required' => 'Kies waar het nest hangt: eigen terrein of openbare plek.',
             'lat.required' => 'Kies de plek van het nest op de kaart.',
             'lat.between' => 'Deze plek ligt niet in Nederland.',
             'lng.between' => 'Deze plek ligt niet in Nederland.',

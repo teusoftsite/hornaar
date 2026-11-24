@@ -21,7 +21,7 @@ it('wist e-mailadressen 90 dagen na afsluiten van het nest', function () {
 it('serveert foto\'s alleen via een geldige ondertekende URL', function () {
     Storage::fake('local');
     gemeente();
-    $id = $this->postJson('/api/reports', ['lat' => 51.5751, 'lng' => 4.6412, 'photo' => UploadedFile::fake()->image('x.jpg')])->json('id');
+    $id = $this->postJson('/api/reports', ['plek' => 'openbaar', 'lat' => 51.5751, 'lng' => 4.6412, 'photo' => UploadedFile::fake()->image('x.jpg')])->json('id');
     $path = Report::where('nest_id', $id)->value('photo_path');
 
     $this->get('/foto/' . $path)->assertForbidden();
@@ -36,7 +36,7 @@ it('haalt EXIF-gegevens (zoals GPS) uit foto\'s', function () {
     $img = imagecreatetruecolor(50, 50); ob_start(); imagejpeg($img); $jpeg = ob_get_clean();
     $exif = "\xFF\xE1" . pack('n', 2 + 14) . "Exif\0\0GPSDATA!";
     $file = UploadedFile::fake()->createWithContent('gps.jpg', substr($jpeg, 0, 2) . $exif . substr($jpeg, 2));
-    $id = $this->postJson('/api/reports', ['lat' => 51.5751, 'lng' => 4.6412, 'photo' => $file])->assertCreated()->json('id');
+    $id = $this->postJson('/api/reports', ['plek' => 'openbaar', 'lat' => 51.5751, 'lng' => 4.6412, 'photo' => $file])->assertCreated()->json('id');
     $stored = Storage::disk('local')->get(Report::where('nest_id', $id)->value('photo_path'));
     expect($stored)->not->toContain('GPSDATA')->not->toContain('Exif');
 });

@@ -27,7 +27,7 @@ class LeadService
     {
         $nest = $report->nest;
         if (! $nest->isParticulier()) {
-            throw new \DomainException('Deze melding gaat via de gemeente.');
+            throw new \DomainException('Een nest op een openbare plek gaat via de gemeente.');
         }
         if ($nest->leads()->whereIn('status', ['zoeken', 'aangeboden', 'geaccepteerd'])->exists()) {
             throw new \DomainException('Er is al een bestrijder gevraagd voor dit nest.');

@@ -64,7 +64,7 @@ it('toont alle pagina\'s per rol zonder fouten', function () {
     $this->get('/melden')->assertOk();
     $this->get('/zakelijk')->assertOk();
     $this->get('/privacy')->assertOk();
-    foreach (['/info', '/info/herkennen', '/info/jaarcyclus', '/info/nesten-zoeken', '/info/achtergrond', '/info/vragen'] as $url) {
+    foreach (['/', '/info/herkennen', '/info/jaarcyclus', '/info/nesten-zoeken', '/info/achtergrond', '/info/vragen'] as $url) {
         $this->get($url)->assertOk()->assertSee('Hoornaar');
     }
     $this->get('/login')->assertOk();

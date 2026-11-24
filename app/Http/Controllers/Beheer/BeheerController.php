@@ -23,7 +23,7 @@ class BeheerController extends Controller
             'gemeenten' => Organisation::gemeenten()->withCount('users')->orderBy('name')->get(),
             'bestrijders' => Organisation::bestrijders()->withCount('users')->orderBy('name')->get(),
             'contracts' => Contract::with('gemeente', 'bestrijder')->latest()->get(),
-            'unrouted' => Nest::whereNull('gemeente_id')->latest()->limit(50)->get(),
+            'unrouted' => Nest::whereNull('gemeente_id')->where('plek', 'openbaar')->latest()->limit(50)->get(),
             'stats' => [
                 'nesten' => Nest::count(),
                 'open' => Nest::whereIn('status', \App\Support\NestStatus::OPEN)->count(),
@@ -57,7 +57,7 @@ class BeheerController extends Controller
         $org = Organisation::create($data);
         if ($org->isGemeente()) {
             // Eerdere meldingen in deze gemeente die nog nergens heen konden, nu koppelen.
-            Nest::whereNull('gemeente_id')->where('cbs_code', $org->cbs_code)->whereDoesntHave('leads')->update(['gemeente_id' => $org->id]);
+            Nest::whereNull('gemeente_id')->where('plek', 'openbaar')->where('cbs_code', $org->cbs_code)->whereDoesntHave('leads')->update(['gemeente_id' => $org->id]);
         }
         return redirect()->route('beheer.organisaties.show', $org)->with('status', 'Organisatie aangemaakt.');
     }

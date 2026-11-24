@@ -16,7 +16,7 @@ it('laadt GA4 met cookiebanner op publieke pagina\'s, niet in de beheeromgeving'
 it('meldt een conversie na een nieuwe melding', function () {
     config(['meldhoornaar.ga_id' => 'G-TEST123']);
     gemeente();
-    $url = $this->postJson('/api/reports', ['lat' => 51.5751, 'lng' => 4.6412])->json('status_url');
+    $url = $this->postJson('/api/reports', ['plek' => 'openbaar', 'lat' => 51.5751, 'lng' => 4.6412])->json('status_url');
     expect($url)->toContain('nieuw=1');
     $this->get($url)->assertSee("mhEvent('melding_verstuurd'", false);
 });

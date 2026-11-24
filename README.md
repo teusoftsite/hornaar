@@ -37,7 +37,7 @@ Organisatiescheiding zit in de controllers (404 bij andermans gegevens) en is ge
 
 ## Belangrijkste stromen
 
-1. **Melden** (`/melden`, `POST /api/reports`, max 5/IP/uur, optioneel Cloudflare Turnstile): foto (verkleind naar 1600 px, EXIF eruit), locatie, adres + gemeente via PDOK. Melder krijgt statuslink `/m/{token}`.
+1. **Melden** (`/melden`, eerst kiezen: eigen terrein → particuliere flow, openbare plek → gemeente, `POST /api/reports`, max 5/IP/uur, optioneel Cloudflare Turnstile): foto (verkleind naar 1600 px, EXIF eruit), locatie, adres + gemeente via PDOK. Melder krijgt statuslink `/m/{token}`.
 2. **Gemeente** beoordeelt → goedkeuren/afwijzen; meldingen binnen 25 m worden als dubbel voorgesteld en samengevoegd; opdracht via actief contract.
 3. **Bestrijder** plant (datum + medewerker), optimaliseert de dagroute, vult de werkbon in (werkt offline: IndexedDB-wachtrij, idempotent op `client_uuid`).
 4. **Facturatie**: werkbon → factuurregel (bestreden = tarief + toeslagen, geen toegang = voorrijkosten, geen nest = niets). De 1e van de maand om 06:00 → conceptfactuur per contract. Versturen geeft nummer `JJJJ-NNNN` per bestrijder, PDF, mail aan gemeente. Verstuurd = onveranderbaar → creditfactuur. Te laat + herinneringen na 7 en 14 dagen.

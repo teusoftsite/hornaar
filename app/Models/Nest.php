@@ -65,6 +65,6 @@ class Nest extends Model
     /** Geen deelnemende gemeente: de inwoner regelt zelf een bestrijder via MeldHoornaar. */
     public function isParticulier(): bool
     {
-        return $this->gemeente_id === null;
+        return $this->plek === 'eigen';
     }
 }

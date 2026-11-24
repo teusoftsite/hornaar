@@ -28,11 +28,13 @@ class ReportService
 
         $geo = $this->geocoder->reverse($lat, $lng);
         $cbs = $this->locator->cbsCodeFor($lat, $lng) ?? $geo['cbs_code'];
-        $gemeente = $this->locator->gemeenteForCode($cbs);
+        $plek = ($data['plek'] ?? 'openbaar') === 'eigen' ? 'eigen' : 'openbaar';
+        // Eigen terrein regelt de inwoner zelf met een bestrijder; dat gaat niet via de gemeente.
+        $gemeente = $plek === 'openbaar' ? $this->locator->gemeenteForCode($cbs) : null;
 
         $photoPath = $photo ? $this->photos->store($photo, 'meldingen') : null;
 
-        $report = DB::transaction(function () use ($data, $lat, $lng, $geo, $cbs, $gemeente, $photoPath, $ip) {
+        $report = DB::transaction(function () use ($data, $plek, $lat, $lng, $geo, $cbs, $gemeente, $photoPath, $ip) {
             $nest = Nest::create([
                 'gemeente_id' => $gemeente?->id,
                 'cbs_code' => $cbs,
@@ -40,6 +42,7 @@ class ReportService
                 'lng' => $lng,
                 'address' => $geo['address'],
                 'location_type' => $data['location_type'] ?? null,
+                'plek' => $plek,
                 'height_m' => $data['height_m'] ?? null,
                 'status' => NestStatus::GEMELD,
             ]);

@@ -5,5 +5,6 @@
 @include('partials.alerts')
 @yield('content')
 </div></main>
+@yield('after')
 @include('partials.footer')
 @endsection
