@@ -54,6 +54,8 @@ class ReportService
                 'photo_path' => $photoPath,
                 'note' => $data['note'] ?? null,
                 'reporter_email' => $data['email'] ?? null,
+                'reporter_name' => $data['name'] ?? null,
+                'reporter_phone' => $data['phone'] ?? null,
                 'token' => Str::random(32),
                 'ip_hash' => $ip ? hash('sha256', $ip . config('app.key')) : null,
                 'lat' => $lat,

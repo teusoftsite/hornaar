@@ -129,7 +129,7 @@ it('maakt maandelijks een leadfactuur per bestrijder', function () {
 
 it('stuurt eigen terrein niet naar de gemeente, openbare plek wel', function () {
     $g = gemeente();
-    $eigen = $this->postJson('/api/reports', ['plek' => 'eigen', 'lat' => 51.5751, 'lng' => 4.6412])->assertCreated()->json('id');
+    $eigen = $this->postJson('/api/reports', ['plek' => 'eigen', 'lat' => 51.5751, 'lng' => 4.6412, 'name' => 'Jan', 'phone' => '0612345678', 'akkoord' => '1'])->assertCreated()->json('id');
     $openbaar = $this->postJson('/api/reports', ['plek' => 'openbaar', 'lat' => 51.5751, 'lng' => 4.6412])->assertCreated()->json('id');
     expect(Nest::find($eigen)->gemeente_id)->toBeNull()->and(Nest::find($eigen)->isParticulier())->toBeTrue();
     expect(Nest::find($openbaar)->gemeente_id)->toBe($g->id);
@@ -137,4 +137,18 @@ it('stuurt eigen terrein niet naar de gemeente, openbare plek wel', function () 
     $this->get('/melden')->assertOk()->assertSee('Op mijn eigen terrein')->assertSee('Wat gebeurt er na je melding?');
     $this->get('/info')->assertRedirect('/');
     $this->get('/')->assertOk()->assertSee('Meld een nest')->assertSee('Hoofdstuk 7');
+});
+
+it('vraagt bij eigen terrein meteen contactgegevens en zoekt direct een bestrijder', function () {
+    Notification::fake();
+    $b = leadBestrijder('A BV', 51.58, 4.64);
+    $this->postJson('/api/reports', ['plek' => 'eigen', 'lat' => 51.5751, 'lng' => 4.6412])->assertJsonValidationErrors(['name', 'phone', 'akkoord']);
+    $this->postJson('/api/reports', ['plek' => 'eigen', 'lat' => 51.5751, 'lng' => 4.6412, 'name' => 'Jan', 'phone' => '0612345678', 'akkoord' => '1'])->assertCreated();
+    $lead = Lead::first();
+    expect($lead->status)->toBe('aangeboden')->and($lead->offered_to_id)->toBe($b->id)->and($lead->phone)->toBe('0612345678');
+
+    // Openbare plek: gegevens mogen leeg, maar worden bewaard als ze er zijn.
+    gemeente();
+    $id = $this->postJson('/api/reports', ['plek' => 'openbaar', 'lat' => 51.5751, 'lng' => 4.6412, 'name' => 'Piet', 'phone' => '0687654321'])->assertCreated()->json('id');
+    expect(Report::where('nest_id', $id)->first()->reporter_phone)->toBe('0687654321')->and(Lead::count())->toBe(1);
 });

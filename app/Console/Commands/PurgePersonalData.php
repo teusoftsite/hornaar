@@ -18,7 +18,7 @@ class PurgePersonalData extends Command
         $closed = [NestStatus::AFGEWEZEN, NestStatus::SAMENGEVOEGD, NestStatus::BESTREDEN, NestStatus::GEFACTUREERD];
         $n = Report::whereNotNull('reporter_email')
             ->whereHas('nest', fn ($q) => $q->whereIn('status', $closed)->where('updated_at', '<', now()->subDays(config('meldhoornaar.purge_reporter_email_days'))))
-            ->update(['reporter_email' => null]);
+            ->update(['reporter_email' => null, 'reporter_name' => null, 'reporter_phone' => null]);
         $l = \App\Models\Lead::whereIn('status', ['afgerond', 'geen_bestrijder', 'geannuleerd'])
             ->where('updated_at', '<', now()->subDays(config('meldhoornaar.purge_reporter_email_days')))
             ->where('name', '!=', 'gewist')

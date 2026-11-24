@@ -25,7 +25,14 @@ class ReportController extends Controller
             'height_m' => ['nullable', 'numeric', 'between:0,40'],
             'note' => ['nullable', 'string', 'max:1000'],
             'email' => ['nullable', 'email', 'max:190'],
+            'name' => ['required_if:plek,eigen', 'nullable', 'string', 'max:120'],
+            'phone' => ['required_if:plek,eigen', 'nullable', 'string', 'max:30', 'regex:/^[0-9 +()\-]{8,}$/'],
+            'akkoord' => ['accepted_if:plek,eigen'],
         ], [
+            'name.required_if' => 'Vul je naam in, dan kan de bestrijder je bellen.',
+            'phone.required_if' => 'Vul je telefoonnummer in, dan kan de bestrijder je bellen.',
+            'phone.regex' => 'Vul een geldig telefoonnummer in.',
+            'akkoord.accepted_if' => 'Geef toestemming om je gegevens met de bestrijder te delen.',
             'plek.required' => 'Kies waar het nest hangt: eigen terrein of openbare plek.',
             'lat.required' => 'Kies de plek van het nest op de kaart.',
             'lat.between' => 'Deze plek ligt niet in Nederland.',
@@ -41,6 +48,9 @@ class ReportController extends Controller
         }
 
         $report = $service->create($data, $request->file('photo'), $request->ip());
+        if ($report->nest->isParticulier()) {
+            app(\App\Services\LeadService::class)->request($report, $data);
+        }
         $url = route('melding.status', ['token' => $report->token, 'nieuw' => 1]);
 
         return $request->expectsJson()

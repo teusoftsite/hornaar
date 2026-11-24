@@ -29,7 +29,14 @@
 <input type="hidden" name="lat" id="lat" value="{{ old('lat') }}"><input type="hidden" name="lng" id="lng" value="{{ old('lng') }}">
 <p id="where" class="small" style="margin:0"></p>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">Opmerking (mag leeg)<input type="text" name="note" maxlength="1000" value="{{ old('note') }}" placeholder="bijv. hoog in de eik achter het huis"></label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">E-mail voor updates (mag leeg)<input type="email" name="email" value="{{ old('email') }}" autocomplete="email"></label>
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+<legend style="font-size: 18px; font-weight: 600; margin-bottom: 6px">Je gegevens</legend>
+<p id="contactuitleg" style="margin: 0; font-size: 14px; color: #5B6169"></p>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600"><span>Naam <span class="verplicht"></span></span><input name="name" value="{{ old('name') }}" autocomplete="name" maxlength="120"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600"><span>Telefoon <span class="verplicht"></span></span><input name="phone" type="tel" value="{{ old('phone') }}" autocomplete="tel" maxlength="30"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">E-mail (mag leeg, voor updates)<input type="email" name="email" value="{{ old('email') }}" autocomplete="email"></label>
+<label id="akkoordrij" style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px"><input type="checkbox" name="akkoord" value="1" @checked(old('akkoord')) style="width: 18px; height: 18px; margin: 2px 0 0; accent-color: #B85F00; flex: none"> Ik geef toestemming om mijn naam, telefoonnummer en de plek van het nest te delen met de bestrijder.</label>
+</fieldset>
 @if($turnstile)<div class="cf-turnstile" data-sitekey="{{ $turnstile }}" data-language="nl"></div>@endif
 <button type="submit" id="send" style="font: 600 18px Inter, sans-serif; background: #F38B12; color: #17181B; border: 0; border-radius: 10px; padding: 18px; min-height: 60px; cursor: pointer">4. Versturen</button>
 <p style="margin: 0; font-size: 13px; color: #5B6169; text-align: center">Geen account nodig. Gratis. <a href="{{ route('privacy') }}">Privacy</a></p>
@@ -67,6 +74,19 @@ document.addEventListener('DOMContentLoaded', function () {
       p.set(pos.coords.latitude, pos.coords.longitude, 18); t.textContent = '✓ Locatie gedeeld'; b.style.background = '#1E7A46';
     }, function () { t.textContent = 'Geweigerd – tik op de kaart'; }, {enableHighAccuracy: true, timeout: 15000});
   });
+  var form = document.getElementById('meld');
+  function plekUpdate() {
+    var eigen = form.querySelector('input[name=plek]:checked').value === 'eigen';
+    ['name', 'phone'].forEach(function (n) { form.elements[n].required = eigen; });
+    form.elements.akkoord.required = eigen;
+    document.getElementById('akkoordrij').style.display = eigen ? 'flex' : 'none';
+    form.querySelectorAll('.verplicht').forEach(function (s) { s.textContent = eigen ? '' : '(mag leeg)'; });
+    document.getElementById('contactuitleg').textContent = eigen
+      ? 'Een bestrijder bij jou in de buurt belt je om een afspraak te maken.'
+      : 'Handig als de gemeente nog een vraag heeft over je melding.';
+  }
+  form.querySelectorAll('input[name=plek]').forEach(function (r) { r.addEventListener('change', plekUpdate); });
+  plekUpdate();
   document.getElementById('photo').addEventListener('change', function () {
     var f = this.files[0]; if (!f) return;
     document.getElementById('fotostatus').textContent = '✓ Foto toegevoegd';

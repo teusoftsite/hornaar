@@ -31,7 +31,7 @@
       <div class="row between"><strong>Melding {{ $loop->iteration }}</strong><span class="small muted">{{ $r->created_at->format('d-m-Y H:i') }}</span></div>
       @if($r->photo_path)<a href="{{ \App\Support\Photo::url($r->photo_path) }}" target="_blank"><img class="photo" src="{{ \App\Support\Photo::url($r->photo_path) }}" alt="Foto melding"></a>@else<p class="small muted">Geen foto.</p>@endif
       @if($r->note)<p style="margin:0">“{{ $r->note }}”</p>@endif
-      <p class="small muted" style="margin:0">{{ $r->reporter_email ? 'Melder wil updates per e-mail' : 'Anoniem' }}</p>
+      <p class="small muted" style="margin:0">@if($r->reporter_name || $r->reporter_phone){{ $r->reporter_name }}@if($r->reporter_phone) · <a href="tel:{{ preg_replace('/[^0-9+]/', '', $r->reporter_phone) }}">{{ $r->reporter_phone }}</a>@endif @if($r->reporter_email) · {{ $r->reporter_email }}@endif @else{{ $r->reporter_email ? 'Melder wil updates per e-mail' : 'Anoniem' }}@endif</p>
     </div>
     @endforeach
   </div>

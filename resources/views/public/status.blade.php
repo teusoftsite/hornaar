@@ -26,8 +26,8 @@
         <h3 style="margin:0">Een bestrijder laten komen</h3>
         <p style="margin:0">Het nest hangt op je eigen terrein. Wij zoeken de dichtstbijzijnde bestrijder voor je. Die belt je, spreekt een prijs af en rekent met je af. MeldHoornaar zelf is gratis.</p>
         <form method="post" action="{{ route('melding.bestrijder', $report->token) }}" class="stack">@csrf
-          <label class="f">Naam<input name="name" value="{{ old('name') }}" required autocomplete="name"></label>
-          <label class="f">Telefoon<input name="phone" type="tel" value="{{ old('phone') }}" required autocomplete="tel"></label>
+          <label class="f">Naam<input name="name" value="{{ old('name', $report->reporter_name) }}" required autocomplete="name"></label>
+          <label class="f">Telefoon<input name="phone" type="tel" value="{{ old('phone', $report->reporter_phone) }}" required autocomplete="tel"></label>
           <label class="f">E-mail (voor updates)<input name="email" type="email" value="{{ old('email', $report->reporter_email) }}" autocomplete="email"></label>
           <label class="row small"><input type="checkbox" name="akkoord" value="1" required> Ik geef toestemming om mijn naam, telefoonnummer en de plek van het nest te delen met de bestrijder.</label>
           <button class="btn orange">Bestrijder vragen</button>
