@@ -81,7 +81,7 @@
 <li>Eigen meldpagina in uw huisstijl</li>
 </ul>
 </article>
-<article id="bestrijders" style="border-radius: 12px; padding: 40px; display: flex; flex-direction: column; gap: 16px; background: #17181B; color: #F2F3F5">
+<article id="bestrijders" style="border-radius: 12px; padding: 40px; display: flex; flex-direction: column; gap: 16px; background: #17181B; color: #F2F3F5"><img src="/img/info/bestrijder.jpg" alt="Bestrijder in beschermend pak haalt vanuit een hoogwerker een hoornaarnest weg" style="width: 100%; height: 220px; object-fit: cover; border-radius: 8px; display: block" loading="lazy"><span style="font-size: 11px; color: #A3A9B1">Foto ter illustratie</span>
 <p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #FFAA45">Voor bestrijders</p>
 <h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 30px; line-height: 34px">Minder rijden, sneller factureren</h3>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 24px">
